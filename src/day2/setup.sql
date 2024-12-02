@@ -4,7 +4,7 @@ CREATE TABLE day2_part2_sequences_values (
     value_id SERIAL PRIMARY KEY,
     sequence_id INTEGER,
     position INTEGER NOT NULL,
-    value NUMERIC NOT NULL,
+    value INTEGER NOT NULL
 );
 
 CREATE TEMP TABLE raw (
@@ -18,9 +18,8 @@ INSERT INTO day2_part2_sequences_values (sequence_id, position, value)
 SELECT 
     r.line_number as sequence_id,
     row_number() OVER (PARTITION BY r.line_number) as position,
-    trim(split.value)::numeric as value
+    trim(split.value)::integer as value
 FROM raw r
-CROSS JOIN LATERAL unnest(string_to_array(r.raw_data, ' ')) AS split(value)
-WHERE trim(split.value) != '';
+CROSS JOIN LATERAL unnest(string_to_array(r.raw_data, ' ')) AS split(value);
 
 DROP TABLE raw
