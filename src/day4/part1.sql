@@ -20,7 +20,7 @@ BEGIN
     -- HORIZONAL 
     FOR i IN 1..rows LOOP
         FOR j IN 1..cols-3 LOOP
-            search_string := substring(text_rows[i] from j for 4);
+            search_string := substr(text_rows[i] ,j ,4);
             IF is_xmas(search_string) THEN
                 count := count + 1;
             END IF;
@@ -30,10 +30,10 @@ BEGIN
     -- VERTICAL
     FOR j IN 1..cols LOOP
         FOR i IN 1..rows-3 LOOP
-            search_string := substring(text_rows[i] from j for 1) || 
-                          substring(text_rows[i+1] from j for 1) ||
-                          substring(text_rows[i+2] from j for 1) ||
-                          substring(text_rows[i+3] from j for 1);
+            search_string := substr(text_rows[i] ,j , 1) || 
+                          substr(text_rows[i+1] ,j , 1) ||
+                          substr(text_rows[i+2] , j ,1) ||
+                          substr(text_rows[i+3] ,j ,1);
             IF is_xmas(search_string) THEN
                 count := count + 1;
             END IF;
@@ -43,10 +43,10 @@ BEGIN
     -- DIAGONAL
     FOR i IN 1..rows-3 LOOP
         FOR j IN 1..cols-3 LOOP
-            search_string := substring(text_rows[i] from j for 1) ||
-                          substring(text_rows[i+1] from j+1 for 1) ||
-                          substring(text_rows[i+2] from j+2 for 1) ||
-                          substring(text_rows[i+3] from j+3 for 1);
+            search_string := substr(text_rows[i] ,j ,1) ||
+                          substr(text_rows[i+1] ,j+1 ,1) ||
+                          substr(text_rows[i+2] ,j+2 ,1) ||
+                          substr(text_rows[i+3] ,j+3,1);
             IF is_xmas(search_string) THEN
                 count := count + 1;
             END IF;
@@ -56,10 +56,10 @@ BEGIN
     -- OTHER DIAGONAL 
     FOR i IN 1..rows-3 LOOP
         FOR j IN 4..cols LOOP
-            search_string := substring(text_rows[i] from j for 1) ||
-                          substring(text_rows[i+1] from j-1 for 1) ||
-                          substring(text_rows[i+2] from j-2 for 1) ||
-                          substring(text_rows[i+3] from j-3 for 1);
+            search_string := substr(text_rows[i] ,j ,1) ||
+                          substr(text_rows[i+1] ,j-1 ,1) ||
+                          substr(text_rows[i+2] ,j-2 ,1) ||
+                          substr(text_rows[i+3] ,j-3 ,1);
             IF is_xmas(search_string) THEN
                 count := count + 1;
             END IF;
